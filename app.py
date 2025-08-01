@@ -25,6 +25,10 @@ os.makedirs(GALERI_DIR, exist_ok=True)
 # -----------------------------
 st.markdown("""
 <style>
+body {
+    background-color: #121212;
+    color: #ffffff;
+}
 .title {
     text-align: center;
     font-size: 36px;
@@ -34,12 +38,12 @@ st.markdown("""
 .subtitle {
     text-align: center;
     font-size: 18px;
-    color: #6c757d;
+    color: #cccccc;
 }
 .footer {
     text-align: center;
     font-size: 14px;
-    color: #aaaaaa;
+    color: #999999;
     margin-top: 30px;
 }
 .stButton > button {
@@ -50,9 +54,10 @@ st.markdown("""
 }
 .stFileUploader {
     border: 2px dashed #4F8BF9;
-    background-color: #f9f9f9;
+    background-color: #1e1e1e;
     border-radius: 10px;
     padding: 20px;
+    color: #ffffff;
 }
 </style>
 """, unsafe_allow_html=True)
@@ -179,17 +184,18 @@ if uploaded_file:
         detail = DOG_BREED_DETAILS.get(predicted_class, {})
         st.markdown(f"""
         <div style='
-            background-color: #eef5ff;
+            background-color: #1e1e1e;
             padding: 20px;
             border-left: 5px solid #4F8BF9;
             border-radius: 10px;
             margin-top: 20px;
-            box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+            box-shadow: 2px 2px 5px rgba(255,255,255,0.05);
+            color: #ffffff;
         '>
             <h4 style='color:#4F8BF9;'>📘 Informasi Ras: {detail.get("nama", "-")}</h4>
-            <p style='color:#333;'><strong>Asal:</strong> {detail.get("asal", "-")}</p>
-            <p style='color:#333;'><strong>Ukuran:</strong> {detail.get("ukuran", "-")}</p>
-            <p style='color:#333;'><strong>Ciri Khas:</strong> {detail.get("ciri_khas", "-")}</p>
+            <p><strong>Asal:</strong> {detail.get("asal", "-")}</p>
+            <p><strong>Ukuran:</strong> {detail.get("ukuran", "-")}</p>
+            <p><strong>Ciri Khas:</strong> {detail.get("ciri_khas", "-")}</p>
         </div>
         """, unsafe_allow_html=True)
 
@@ -226,10 +232,16 @@ st.markdown("### 📜 Riwayat Klasifikasi")
 if st.session_state.history:
     for item in reversed(st.session_state.history[-5:]):
         st.markdown(f"""
-        <div style='padding: 10px; background-color: #f0f0f0; border-radius: 8px; margin-bottom: 10px;'>
-            🕒 <strong>{item['timestamp']}</strong><br/>
+        <div style='
+            padding: 10px;
+            background-color: #1e1e1e;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            color: #ffffff;
+        '>
+            🧒 <strong>{item['timestamp']}</strong><br/>
             📷 <em>{os.path.basename(item['img_path'])}</em><br/>
-            🐕 <strong style='color:#1565c0;'>{item['label']}</strong><br/>
+            🐕 <strong style='color:#4F8BF9;'>{item['label']}</strong><br/>
             🎯 Keyakinan: <strong>{item['confidence']}</strong>
         </div>
         """, unsafe_allow_html=True)
