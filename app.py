@@ -187,9 +187,9 @@ if uploaded_file:
             box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
         '>
             <h4 style='color:#4F8BF9;'>📘 Informasi Ras: {detail.get("nama", "-")}</h4>
-            <p><strong>Asal:</strong> {detail.get("asal", "-")}</p>
-            <p><strong>Ukuran:</strong> {detail.get("ukuran", "-")}</p>
-            <p><strong>Ciri Khas:</strong> {detail.get("ciri_khas", "-")}</p>
+            <p style='color:#333;'><strong>Asal:</strong> {detail.get("asal", "-")}</p>
+            <p style='color:#333;'><strong>Ukuran:</strong> {detail.get("ukuran", "-")}</p>
+            <p style='color:#333;'><strong>Ciri Khas:</strong> {detail.get("ciri_khas", "-")}</p>
         </div>
         """, unsafe_allow_html=True)
 
