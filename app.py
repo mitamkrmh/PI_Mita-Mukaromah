@@ -5,24 +5,18 @@ import numpy as np
 import tensorflow as tf
 from datetime import datetime
 
-# -----------------------------
 # Konfigurasi Halaman
-# -----------------------------
 st.set_page_config(
     page_title="Klasifikasi Ras Anjing",
     layout="centered",
     page_icon="🐾"
 )
 
-# -----------------------------
 # Direktori Galeri
-# -----------------------------
 GALERI_DIR = "galeri"
 os.makedirs(GALERI_DIR, exist_ok=True)
 
-# -----------------------------
 # CSS Kustom
-# -----------------------------
 st.markdown("""
 <style>
 body {
@@ -62,16 +56,12 @@ body {
 </style>
 """, unsafe_allow_html=True)
 
-# -----------------------------
 # Header
-# -----------------------------
 st.markdown('<div class="title">🐶 Aplikasi Klasifikasi Ras Anjing</div>', unsafe_allow_html=True)
 st.markdown('<div class="subtitle">Unggah gambar anjing dan biarkan AI memprediksi rasnya!</div>', unsafe_allow_html=True)
 st.markdown("---")
 
-# -----------------------------
 # Informasi Umum Aplikasi
-# -----------------------------
 st.markdown("## ℹ️ Tentang Aplikasi")
 st.markdown("""
 Aplikasi **Klasifikasi Ras Anjing** ini dikembangkan menggunakan teknologi *Artificial Intelligence*, khususnya *Deep Learning* dengan arsitektur **MobileNetV2**.
@@ -94,9 +84,7 @@ Dengan bantuan model cerdas berbasis **Transfer Learning**, sistem ini dapat men
 > Aplikasi ini cocok digunakan oleh pecinta hewan peliharaan, pemilik anjing, atau siapa pun yang ingin mengenal lebih dalam tentang karakteristik ras anjing melalui gambar.
 """)
 
-# -----------------------------
 # Load Model & Label
-# -----------------------------
 @st.cache_resource
 def load_model_and_labels():
     model = tf.keras.models.load_model("dog_breed_classifier_final.keras")
@@ -107,60 +95,62 @@ def load_model_and_labels():
 model, class_names = load_model_and_labels()
 CONFIDENCE_THRESHOLD = 0.75
 
-# -----------------------------
 # Informasi Setiap Ras
-# -----------------------------
 DOG_BREED_DETAILS = {
     "french_bulldog": {
         "nama": "French Bulldog",
         "asal": "Prancis",
         "ukuran": "Kecil (hingga 12 kg)",
-        "ciri_khas": "Telinga kelelawar, tubuh kompak, moncong pendek"
+        "ciri_khas": "Telinga kelelawar, tubuh kompak, moncong pendek",
+        "perilaku": "Ramah, tenang, dan cocok sebagai anjing rumahan.",
+        "perawatan": "Membutuhkan perawatan wajah rutin untuk mencegah iritasi pada lipatan kulit."
     },
     "german_shepherd": {
         "nama": "German Shepherd",
         "asal": "Jerman",
         "ukuran": "Besar (30–40 kg)",
-        "ciri_khas": "Telinga tegak, bulu tebal, anjing penjaga yang sangat cerdas"
+        "ciri_khas": "Telinga tegak, bulu tebal, anjing penjaga yang sangat cerdas",
+        "perilaku": "Cerdas, setia, dan mudah dilatih, sangat cocok sebagai anjing penjaga.",
+        "perawatan": "Perlu disisir secara rutin karena bulunya yang tebal dan mudah rontok."
     },
     "golden_retriever": {
         "nama": "Golden Retriever",
         "asal": "Skotlandia",
         "ukuran": "Sedang (25–34 kg)",
-        "ciri_khas": "Bulu emas panjang, ramah, suka air"
+        "ciri_khas": "Bulu emas panjang, ramah, suka air",
+        "perilaku": "Sangat bersahabat, penyayang, dan cocok untuk keluarga dengan anak-anak.",
+        "perawatan": "Memerlukan aktivitas fisik harian dan perawatan bulu yang teratur."
     },
     "poodle": {
         "nama": "Poodle",
         "asal": "Jerman/Prancis",
         "ukuran": "Mini hingga sedang",
-        "ciri_khas": "Bulu keriting, sangat cerdas dan mudah dilatih"
+        "ciri_khas": "Bulu keriting, sangat cerdas dan mudah dilatih",
+        "perilaku": "Aktif, cerdas, dan mudah beradaptasi dengan lingkungan baru.",
+        "perawatan": "Bulu keriting perlu dipangkas dan dirawat secara rutin agar tidak kusut."
     },
     "yorkshire_terrier": {
         "nama": "Yorkshire Terrier",
         "asal": "Inggris",
         "ukuran": "Kecil (2–3 kg)",
-        "ciri_khas": "Bulu panjang dan halus, aktif, cocok di apartemen"
+        "ciri_khas": "Bulu panjang dan halus, aktif, cocok di apartemen",
+        "perilaku": "Lincah, berani, dan senang menjadi pusat perhatian.",
+        "perawatan": "Membutuhkan penyisiran bulu harian dan perhatian khusus pada kesehatan gigi."
     }
 }
 
-# -----------------------------
 # Preprocessing Gambar
-# -----------------------------
 def preprocess_image(img):
     img = img.resize((224, 224))
     img_array = tf.keras.utils.img_to_array(img) / 255.0
     img_array = np.expand_dims(img_array, axis=0)
     return img_array
 
-# -----------------------------
 # Histori Klasifikasi
-# -----------------------------
 if "history" not in st.session_state:
     st.session_state.history = []
 
-# -----------------------------
 # Upload & Prediksi
-# -----------------------------
 st.markdown("---")
 uploaded_file = st.file_uploader("📷 Unggah gambar anjing Anda", type=["jpg", "jpeg", "png"])
 
@@ -196,6 +186,9 @@ if uploaded_file:
             <p><strong>Asal:</strong> {detail.get("asal", "-")}</p>
             <p><strong>Ukuran:</strong> {detail.get("ukuran", "-")}</p>
             <p><strong>Ciri Khas:</strong> {detail.get("ciri_khas", "-")}</p>
+            <p><strong>Perilaku:</strong> {detail.get("perilaku", "-")}</p>
+            <p><strong>Perawatan:</strong> {detail.get("perawatan", "-")}</p>
+
         </div>
         """, unsafe_allow_html=True)
 
@@ -213,9 +206,7 @@ if uploaded_file:
         st.error("⚠️ Gambar tidak dikenali")
         st.write("Model tidak yakin bahwa gambar ini termasuk dalam 5 ras anjing yang dikenali.")
 
-# -----------------------------
 # Galeri Gambar
-# -----------------------------
 st.markdown("### 🖼️ Galeri Gambar")
 img_files = sorted(os.listdir(GALERI_DIR), reverse=True)[:5]
 if img_files:
@@ -225,9 +216,7 @@ if img_files:
 else:
     st.info("Belum ada gambar dalam galeri.")
 
-# -----------------------------
 # Riwayat Klasifikasi
-# -----------------------------
 st.markdown("### 📜 Riwayat Klasifikasi")
 if st.session_state.history:
     for item in reversed(st.session_state.history[-5:]):
@@ -248,7 +237,5 @@ if st.session_state.history:
 else:
     st.info("Belum ada riwayat klasifikasi.")
 
-# -----------------------------
 # Footer
-# -----------------------------
 st.markdown('<div class="footer">© 2025 Aplikasi Klasifikasi Anjing | Dibuat oleh Mita Mukaromah</div>', unsafe_allow_html=True)
