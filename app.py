@@ -93,7 +93,7 @@ def load_model_and_labels():
     return model, labels
 
 model, class_names = load_model_and_labels()
-CONFIDENCE_THRESHOLD = 0.75
+CONFIDENCE_THRESHOLD = 0.70
 
 # Informasi Setiap Ras
 DOG_BREED_DETAILS = {
