@@ -57,7 +57,7 @@ body {
 """, unsafe_allow_html=True)
 
 # Header
-st.markdown('<div class="title">🐶 Web Klasifikasi Ras Anjing</div>', unsafe_allow_html=True)
+st.markdown('<div class="title">🐶 Website Klasifikasi Ras Anjing</div>', unsafe_allow_html=True)
 st.markdown('<div class="subtitle">Unggah gambar anjing dan biarkan AI memprediksi rasnya!</div>', unsafe_allow_html=True)
 st.markdown("---")
 
