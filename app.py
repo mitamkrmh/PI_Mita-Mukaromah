@@ -57,16 +57,15 @@ body {
 """, unsafe_allow_html=True)
 
 # Header
-st.markdown('<div class="title">🐶 Aplikasi Klasifikasi Ras Anjing</div>', unsafe_allow_html=True)
+st.markdown('<div class="title">🐶 Web Klasifikasi Ras Anjing</div>', unsafe_allow_html=True)
 st.markdown('<div class="subtitle">Unggah gambar anjing dan biarkan AI memprediksi rasnya!</div>', unsafe_allow_html=True)
 st.markdown("---")
 
-# Informasi Umum Aplikasi
-st.markdown("## ℹ️ Tentang Aplikasi")
+# Informasi Umum Website
 st.markdown("""
-Aplikasi **Klasifikasi Ras Anjing** ini dikembangkan menggunakan teknologi *Artificial Intelligence*, khususnya *Deep Learning* dengan arsitektur **MobileNetV2**.
+Website **Klasifikasi Ras Anjing** ini dikembangkan menggunakan teknologi *Artificial Intelligence*, khususnya *Deep Learning* dengan arsitektur **MobileNetV2**.
 
-Aplikasi ini mampu mengenali dan mengklasifikasikan gambar anjing ke dalam 5 ras berbeda:
+Website ini mampu mengenali dan mengklasifikasikan gambar anjing ke dalam 5 ras berbeda:
 - 🐾 French Bulldog
 - 🐾 German Shepherd
 - 🐾 Golden Retriever
@@ -81,7 +80,7 @@ Dengan bantuan model cerdas berbasis **Transfer Learning**, sistem ini dapat men
 3. Aplikasi akan memproses dan menampilkan hasil prediksi lengkap dengan tingkat kepercayaannya.
 4. Informasi tentang ras yang dikenali juga akan ditampilkan.
 
-> Aplikasi ini cocok digunakan oleh pecinta hewan peliharaan, pemilik anjing, atau siapa pun yang ingin mengenal lebih dalam tentang karakteristik ras anjing melalui gambar.
+> Website ini cocok digunakan oleh pecinta hewan peliharaan, pemilik anjing, atau siapa pun yang ingin mengenal lebih dalam tentang karakteristik ras anjing melalui gambar.
 """)
 
 # Load Model & Label
