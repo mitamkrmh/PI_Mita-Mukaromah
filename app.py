@@ -66,22 +66,23 @@ st.markdown("""
 Website **Klasifikasi Ras Anjing** ini dikembangkan menggunakan teknologi *Artificial Intelligence*, khususnya *Deep Learning* dengan arsitektur **MobileNetV2**.
 
 Website ini mampu mengenali dan mengklasifikasikan gambar anjing ke dalam 5 ras berbeda:
-- 🐾 French Bulldog
-- 🐾 German Shepherd
-- 🐾 Golden Retriever
-- 🐾 Poodle
-- 🐾 Yorkshire Terrier
-
-Dengan bantuan model cerdas berbasis **Transfer Learning**, sistem ini dapat mengidentifikasi jenis ras anjing dengan tingkat kepercayaan (*confidence*) tinggi, hanya dari gambar yang diunggah.
-
-### 🔍 Cara Menggunakan:
-1. Siapkan gambar anjing berformat .jpg, .jpeg, atau .png.
-2. Klik tombol unggah untuk memilih gambar.
-3. Aplikasi akan memproses dan menampilkan hasil prediksi lengkap dengan tingkat kepercayaannya.
-4. Informasi tentang ras yang dikenali juga akan ditampilkan.
-
-> Website ini cocok digunakan oleh pecinta hewan peliharaan, pemilik anjing, atau siapa pun yang ingin mengenal lebih dalam tentang karakteristik ras anjing melalui gambar.
 """)
+# Contoh Gambar Anjing per Kelas
+example_images = {
+    "French Bulldog": "example_images/french_bulldog.jpeg",
+    "German Shepherd": "example_images/german_shepherd.jpg",
+    "Golden Retriever": "example_images/golden_retriever.jpg",
+    "Poodle": "example_images/poodle.jpg",
+    "Yorkshire Terrier": "example_images/yorkshire_terrier.jpg",
+}
+
+cols = st.columns(len(example_images))
+
+for col, (breed, img_path) in zip(cols, example_images.items()):
+    try:
+        col.image(img_path, caption=breed, use_container_width=True)
+    except:
+        col.warning(f"Gambar {breed} tidak ditemukan.")
 
 # Load Model & Label
 @st.cache_resource
