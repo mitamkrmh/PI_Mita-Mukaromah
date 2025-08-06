@@ -87,13 +87,8 @@ Dengan bantuan model cerdas berbasis **Transfer Learning**, sistem ini dapat men
 @st.cache_resource
 def load_model_and_labels():
     model = tf.keras.models.load_model("dog_breed_classifier_final.keras")
-    labels = [
-        "french_bulldog",
-        "german_shepherd",
-        "golden_retriever",
-        "poodle",
-        "yorkshire_terrier"
-    ]
+    with open("labels.txt", "r") as file:
+        labels = [line.strip() for line in file.readlines()]
     return model, labels
 
 model, class_names = load_model_and_labels()
